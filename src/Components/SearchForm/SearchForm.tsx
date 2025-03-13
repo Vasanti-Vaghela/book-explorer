@@ -1,27 +1,37 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { fetchBooks } from "../../store/books-slice";
 import "./SearchForm.css"; // Import the CSS file
 
-interface SearchFormProps {
-  onSearch: (query: { title: string; author: string; genre: string }) => void;
-}
-
-const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
+const SearchForm: React.FC = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
   const [error, setError] = useState(""); // Error message state
 
+  const dispatch = useDispatch<AppDispatch>();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check if at least one field is filled
+    // Check if at least one field is filled for validation
     if (!title.trim() && !author.trim() && !genre.trim()) {
       setError("Please fill in at least one field before searching.");
       return;
     }
 
     setError(""); // Clear error if validation passes
-    onSearch({ title, author, genre });
+    let searchQuery = "";
+
+    if (title) searchQuery += `intitle:${title}+`;
+    if (author) searchQuery += `inauthor:${author}+`;
+    if (genre) searchQuery += `subject:${genre}`;
+
+    searchQuery = searchQuery.trim().replace(/\+$/, ""); // Remove trailing `+` if any
+
+    if (searchQuery) {
+      dispatch(fetchBooks(searchQuery));
+    }
   };
 
   return (

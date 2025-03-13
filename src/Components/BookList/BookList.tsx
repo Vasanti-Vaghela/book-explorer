@@ -1,53 +1,53 @@
 import "./BookList.css";
-import { TBook } from "../Types";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite } from "../../store/favorites-slice";
+import { RootState } from "../../store/store";
 
-interface TBookLListProps {
-  books: TBook[];
-  error: string;
-  loading: boolean;
-}
-
-const BookList: React.FC<TBookLListProps> = ({ books, error, loading }) => {
-  const navigate = useNavigate();
+const BookList: React.FC = () => {
+  const dispatch = useDispatch();
+  const { books, status, error } = useSelector(
+    (state: RootState) => state.books
+  );
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {status === "loading" && <p>Loading...</p>}
       {error && <p className="error-message">{error}</p>}
       <div className="book-grid">
         {books.length > 0
           ? books.map((book) => (
               // <Link to={`/book/${book.id}`}>
-              <div
-                key={book.id}
-                className="book-card"
-                onClick={() => navigate(`/book/${book.id}`)}
-              >
-                {book.volumeInfo.imageLinks?.thumbnail && (
-                  <img
-                    className="book-image"
-                    src={book.volumeInfo.imageLinks.thumbnail}
-                    alt={book.volumeInfo.title}
-                  />
+              <div key={book.id} className="book-card">
+                {book.image && (
+                  <Link to={`/book/${book.id}`}>
+                    <img
+                      className="book-image"
+                      src={book.image}
+                      alt={book.title}
+                    />
+                  </Link>
                 )}
                 <div className="book-info">
-                  <h3 className="book-title">{book.volumeInfo.title}</h3>
+                  <h3 className="book-title">{book.title}</h3>
                   <p className="book-author">
-                    {book.volumeInfo.authors?.join(", ") || "Unknown Author"}
+                    {book.authors?.join(", ") || "Unknown Author"}
                   </p>
                   <div className="book-description">
-                    {book.volumeInfo.description || "No Date Available"}
+                    {book.description || "No Date Available"}
                   </div>
                 </div>
                 <div className="add-favorite">
-                  <button className="add-favorite-btn">
+                  <button
+                    className="add-favorite-btn"
+                    onClick={() => dispatch(addFavorite(book))}
+                  >
                     ❤️ Add to Favorites
                   </button>
                 </div>
               </div>
               // </Link>
             ))
-          : !loading && !error && <p>No books found.</p>}
+          : status != "loading" && !error && <p>No books found.</p>}
       </div>
     </div>
   );
