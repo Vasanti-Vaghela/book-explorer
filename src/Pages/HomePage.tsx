@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
       const response = await fetch(apiUrl);
       if (!response.ok) throw new Error("Failed to fetch books");
       const data = await response.json();
-      console.log("DATA", data);
+      console.log("DATA", data); //delete it later
       setBooks(data.items || []);
     } catch (err) {
       console.log(err);
