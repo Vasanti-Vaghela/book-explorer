@@ -1,22 +1,15 @@
 import React, { useState } from "react";
 import "./SearchForm.css"; // Import the CSS file
 
-interface TQuery {
-  title: string;
-  author: string;
-  genre: string;
+interface SearchFormProps {
+  onSearch: (query: { title: string; author: string; genre: string }) => void;
 }
 
-const SearchForm: React.FC = () => {
+const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
   const [error, setError] = useState(""); // Error message state
-
-  const handleSearch = (query: TQuery) => {
-    console.log("Search Query:", query);
-    // Implement search functionality here
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +21,7 @@ const SearchForm: React.FC = () => {
     }
 
     setError(""); // Clear error if validation passes
-    handleSearch({ title, author, genre });
+    onSearch({ title, author, genre });
   };
 
   return (

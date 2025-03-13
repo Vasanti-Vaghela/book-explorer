@@ -1,0 +1,30 @@
+/* Book List */
+.book-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Book Card */
+.book-card {
+  background: #f8f8f8;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+}
+
+.book-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 1rem;
+}

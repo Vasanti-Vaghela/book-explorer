@@ -1,10 +1,10 @@
-import SearchForm from "./Components/SearchForm/SearchForm";
+import HomePage from "./Pages/HomePage";
 
 function App() {
   return (
     <div>
       <h1>Book Search</h1>
-      <SearchForm />
+      <HomePage />
     </div>
   );
 }
