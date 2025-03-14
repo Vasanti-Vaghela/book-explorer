@@ -15,9 +15,8 @@ const BookList: React.FC = () => {
       {status === "loading" && <p>Loading...</p>}
       {error && <p className="error-message">{error}</p>}
       <div className="book-grid">
-        {searchedBooks.length > 0
-          ? books.map((book) => <BookCard key={book.id} book={book} />)
-          : status != "loading" && !error && <p>No books found.</p>}
+        {searchedBooks.length > 0 &&
+          books.map((book) => <BookCard key={book.id} book={book} />)}
       </div>
     </div>
   );

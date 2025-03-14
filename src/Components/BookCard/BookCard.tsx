@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TBook } from "../../Types";
 import { useDispatch } from "react-redux";
 import { addFavorite } from "../../store/favorites-slice";
+import "./BookCard.css";
 
 interface TBookCardProps {
   book: TBook;
