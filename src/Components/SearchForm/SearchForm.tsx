@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { fetchBooks } from "../../store/books-slice";
+import { clearBooks, fetchBooks } from "../../store/books-slice";
 import "./SearchForm.css"; // Import the CSS file
 
 const SearchForm: React.FC = () => {
@@ -30,6 +30,7 @@ const SearchForm: React.FC = () => {
     searchQuery = searchQuery.trim().replace(/\+$/, ""); // Remove trailing `+` if any
 
     if (searchQuery) {
+      dispatch(clearBooks());
       dispatch(fetchBooks(searchQuery));
     }
   };

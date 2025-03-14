@@ -1,5 +1,5 @@
 // src/components/BookDetails.tsx
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { useParams } from "react-router-dom";
@@ -11,7 +11,8 @@ const BookDetailPage: React.FC = () => {
   const { books, status, error } = useSelector(
     (state: RootState) => state.books
   );
-  const book = books.find((b: TBook) => b.id === id);
+  const searchedBooks = useMemo(() => books, [books]); //Reduces unnecessary renders of components that use books
+  const book = searchedBooks.find((b: TBook) => b.id === id);
   if (status === "loading") {
     return <p>Loading...</p>;
   }

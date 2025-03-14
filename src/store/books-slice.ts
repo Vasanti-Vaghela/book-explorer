@@ -31,10 +31,8 @@ export const fetchBooks = createAsyncThunk(
         description: item.volumeInfo.description || "No description available.",
       }));
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      }
-      return rejectWithValue("An unknown error occurred");
+      console.log("ERROR", error);
+      return rejectWithValue("Found no result for such input values.");
     }
   }
 );
