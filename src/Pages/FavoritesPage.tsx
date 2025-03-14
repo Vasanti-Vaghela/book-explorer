@@ -23,13 +23,31 @@ const FavoritesPage = () => {
                 alt={book.title}
                 className="favorite-image"
               />
-              <p className="favorite-title">{book.title}</p>
-              <button
-                className="remove-button"
-                onClick={() => dispatch(removeFavorite(book.id))}
-              >
-                ❌ Remove
-              </button>
+              <div className="favorite-details">
+                <p className="favorite-title">{book.title}</p>
+                <p className="favorite-authors">by {book.authors.join(", ")}</p>
+
+                {/* Display Notes if Available */}
+                {book.notes && (
+                  <p className="favorite-notes">
+                    <strong>Notes:</strong> {book.notes}
+                  </p>
+                )}
+
+                {/* Display Tags if Available */}
+                {book.tags && book.tags.length > 0 && (
+                  <p className="favorite-tags">
+                    <strong>Tags:</strong> {book.tags.join(", ")}
+                  </p>
+                )}
+
+                <button
+                  className="remove-button"
+                  onClick={() => dispatch(removeFavorite(book.id))}
+                >
+                  ❌ Remove
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TBook } from "../Types";
 
-interface FavoritesState {
-  favorites: TBook[];
+interface TFavoriteBook extends TBook {
+  notes?: string;
+  tags?: string[];
 }
 
-const initialState: FavoritesState = {
+interface TFavoritesState {
+  favorites: TFavoriteBook[];
+}
+
+const initialState: TFavoritesState = {
   favorites: [],
 };
 
@@ -13,8 +18,10 @@ const favoritesSlice = createSlice({
   name: "favorites",
   initialState,
   reducers: {
-    addFavorite: (state, action: PayloadAction<TBook>) => {
-      if (!state.favorites.find((book) => book.id === action.payload.id)) {
+    addFavorite: (state, action: PayloadAction<TFavoriteBook>) => {
+      if (
+        !state.favorites.find((book: TBook) => book.id === action.payload.id)
+      ) {
         state.favorites.push(action.payload);
       }
     },
