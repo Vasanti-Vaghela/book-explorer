@@ -7,11 +7,13 @@ import "./AddFavoriteModal.css";
 interface AddFavoriteModalProps {
   book: TBook | null;
   onClose: () => void;
+  isOpen: boolean;
 }
 
 const AddFavoriteModal: React.FC<AddFavoriteModalProps> = ({
   book,
   onClose,
+  isOpen,
 }) => {
   const dispatch = useDispatch();
   const [notes, setNotes] = useState("");
@@ -32,14 +34,24 @@ const AddFavoriteModal: React.FC<AddFavoriteModalProps> = ({
   };
 
   return (
-    <div className="modal-overlay">
+    <div
+      className="modal-overlay"
+      role="dialog"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
+      aria-hidden={!isOpen}
+    >
       <div className="modal-content">
-        <button className="close-button" onClick={onClose}>
+        <button
+          className="close-button"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
           ✖
         </button>
-        <h2>Add to Favorites</h2>
-        <p>
-          <strong>{book.title}</strong> by {book.authors.join(", ")}
+        <h2 id="modal-title">Add to Favorites</h2>
+        <p id="modal-description">
+          You can add notes or tags to this favorite book.
         </p>
 
         <form onSubmit={handleSubmit} className="favorite-form">

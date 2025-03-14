@@ -37,7 +37,11 @@ const BookCard: React.FC<TBookCardProps> = ({ book }) => {
         </div>
       </div>
       {showModal && (
-        <AddFavoriteModal book={book} onClose={() => setShowModal(false)} />
+        <AddFavoriteModal
+          book={book}
+          onClose={() => setShowModal(false)}
+          isOpen={showModal}
+        />
       )}
     </>
   );

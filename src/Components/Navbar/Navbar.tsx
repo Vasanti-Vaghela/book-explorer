@@ -14,10 +14,20 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">Book Explorer</div>
       <div>
-        <NavLink to="/" style={activePage}>
+        <NavLink
+          to="/"
+          style={activePage}
+          aria-current={window.location.pathname === "/" ? "page" : undefined}
+        >
           Search
         </NavLink>
-        <NavLink to="/favorites" style={activePage}>
+        <NavLink
+          to="/favorites"
+          style={activePage}
+          aria-current={
+            window.location.pathname === "/favorites" ? "page" : undefined
+          }
+        >
           Favorites
         </NavLink>
       </div>

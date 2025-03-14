@@ -43,6 +43,7 @@ const FavoritesPage = () => {
 
                 <button
                   className="remove-button"
+                  aria-label={`Remove ${book.title} from favorites`}
                   onClick={() => dispatch(removeFavorite(book.id))}
                 >
                   ❌ Remove
