@@ -30,7 +30,6 @@ const BookCard: React.FC<TBookCardProps> = ({ book }) => {
           <button
             className="add-favorite-btn"
             onClick={() => setShowModal(true)}
-            // onClick={() => dispatch(addFavorite(book))}
           >
             ❤️ Add to Favorites
           </button>
