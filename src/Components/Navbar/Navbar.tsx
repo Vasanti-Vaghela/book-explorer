@@ -1,3 +1,4 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
@@ -14,20 +15,10 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="logo">Book Explorer</div>
       <div>
-        <NavLink
-          to="/"
-          style={activePage}
-          aria-current={window.location.pathname === "/" ? "page" : undefined}
-        >
+        <NavLink to="/" style={activePage}>
           Search
         </NavLink>
-        <NavLink
-          to="/favorites"
-          style={activePage}
-          aria-current={
-            window.location.pathname === "/favorites" ? "page" : undefined
-          }
-        >
+        <NavLink to="/favorites" style={activePage}>
           Favorites
         </NavLink>
       </div>
