@@ -5,6 +5,7 @@ import { RootState } from "../store/store";
 import { useParams } from "react-router-dom";
 import { TBook } from "../Types";
 import "./BookDetailPage.css";
+import Loader from "../Components/Loader/Loader";
 
 const BookDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,7 +15,7 @@ const BookDetailPage: React.FC = () => {
   const searchedBooks = useMemo(() => books, [books]); //Reduces unnecessary renders of components that use books
   const book = searchedBooks.find((b: TBook) => b.id === id);
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   if (status === "failed") {

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import BookCard from "../BookCard/BookCard";
 import { useMemo } from "react";
+import Loader from "../Loader/Loader";
 
 const BookList: React.FC = () => {
   const { books, status, error } = useSelector(
@@ -12,9 +13,9 @@ const BookList: React.FC = () => {
 
   return (
     <div>
-      {status === "loading" && <p>Loading...</p>}
+      {status === "loading" && <Loader />}
       {error && <p className="error-message">{error}</p>}
-      <div className="book-grid">
+      <div className="book-grid" role="list">
         {searchedBooks.length > 0 &&
           books.map((book) => <BookCard key={book.id} book={book} />)}
       </div>
